@@ -1,0 +1,58 @@
+﻿@page
+@model IndexModel
+@{
+  ViewData["Title"] = Model.PageData.Data.Fields.Seo.Title;
+  ViewData["Description"] = Model.PageData.Data.Fields.Seo.Description;
+  ViewData["Author"] = Model.PageData.Data.Fields.Seo.Author;
+}
+<section> 
+  <h1>@Model.PageData.Data.Fields.Header.Headline</h1>
+  <p>@Model.PageData.Data.Fields.Header.Sub</p>
+  <form method="get" action="/Search"> 
+    <input id="search" name="q" type="text" placeholder="Search for answers..." />
+    <input type="submit" value="Search" />
+  </form>
+</section>
+</div>
+</header>
+<main>
+  <section id="one"> 
+    <div class="bodify"> 
+      <h2 class="accent">Browse All Topics</h2>
+      <div class="features"> 
+        @foreach (var TopicCard in Model.PageData.Data.Fields.Topics) {
+          <a class="item" href="/Category/@TopicCard.Name">
+            <div class="image-container"> 
+              <img src="@TopicCard.Icon" alt="card" />
+            </div>
+            <h3>@TopicCard.Name</h3>
+            <p>@TopicCard.Description</p>
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+  <section id="two"> 
+    <div class="bodify">
+      <h2>Featured Article</h2>
+      <article> 
+        @foreach (var Feature in Model.PageData.Data.Fields.Features) {
+          <a class="list" href="/Article/@Feature.Slug">
+            <span>@Feature.Name</span>
+            <div> 
+              <img src="/assets/img/arrow.svg" alt="arrow" />
+            </div>
+          </a>
+        }
+      </article>
+      <hr />
+    </div>
+  </section>
+  <section id="three"> 
+    <div class="bodify"> 
+      <h2> @Model.PageData.Data.Fields.Contact.Headline </h2>
+      <p> @Model.PageData.Data.Fields.Contact.Sub </p>
+      <button href="" onclick="window.open('@Model.PageData.Data.Fields.Contact.ContactLink')"> contact us </button>
+    </div>
+  </section>
+</main>
